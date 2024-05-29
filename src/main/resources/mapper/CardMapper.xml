@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yutong.stzb.mapper.CardMapper">
+
+    <resultMap id="BaseResultMap" type="com.yutong.stzb.domain.Card">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="cardName" column="card_name" jdbcType="VARCHAR"/>
+            <result property="cardSkill" column="card_skill" jdbcType="VARCHAR"/>
+            <result property="cardSkillType" column="card_skill_type" jdbcType="INTEGER"/>
+            <result property="cardSkillEffectiveDistance" column="card_skill_effective_distance" jdbcType="INTEGER"/>
+            <result property="cardSkillTargetType" column="card_skill_target_type" jdbcType="INTEGER"/>
+            <result property="cardSkillStartingRate" column="card_skill_starting_rate" jdbcType="DECIMAL"/>
+            <result property="cardAtk" column="card_atk" jdbcType="INTEGER"/>
+            <result property="cardAtkGrowValue" column="card_atk_grow_value" jdbcType="DECIMAL"/>
+            <result property="cardDef" column="card_def" jdbcType="INTEGER"/>
+            <result property="cardDefGrowValue" column="card_def_grow_value" jdbcType="DECIMAL"/>
+            <result property="cardStrategyValue" column="card_strategy_value" jdbcType="INTEGER"/>
+            <result property="cardStrategyGrowValue" column="card_strategy_grow_value" jdbcType="DECIMAL"/>
+            <result property="cardSpeedValue" column="card_speed_value" jdbcType="INTEGER"/>
+            <result property="cardSpeedGrowValue" column="card_speed_grow_value" jdbcType="DECIMAL"/>
+            <result property="cardAttackRange" column="card_attack_range" jdbcType="INTEGER"/>
+            <result property="cardCost" column="card_cost" jdbcType="INTEGER"/>
+            <result property="cardBots" column="card_bots" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,card_name,card_skill,
+        card_skill_type,card_skill_effective_distance,card_skill_target_type,
+        card_skill_starting_rate,card_atk,card_atk_grow_value,
+        card_def,card_def_grow_value,card_strategy_value,
+        card_strategy_grow_value,card_speed_value,card_speed_grow_value,
+        card_attack_range,card_cost,card_bots
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from card
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from card
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.yutong.stzb.domain.Card" useGeneratedKeys="true">
+        insert into card
+        ( id,card_name,card_skill
+        ,card_skill_type,card_skill_effective_distance,card_skill_target_type
+        ,card_skill_starting_rate,card_atk,card_atk_grow_value
+        ,card_def,card_def_grow_value,card_strategy_value
+        ,card_strategy_grow_value,card_speed_value,card_speed_grow_value
+        ,card_attack_range,card_cost,card_bots
+        )
+        values (#{id,jdbcType=INTEGER},#{cardName,jdbcType=VARCHAR},#{cardSkill,jdbcType=VARCHAR}
+        ,#{cardSkillType,jdbcType=INTEGER},#{cardSkillEffectiveDistance,jdbcType=INTEGER},#{cardSkillTargetType,jdbcType=INTEGER}
+        ,#{cardSkillStartingRate,jdbcType=DECIMAL},#{cardAtk,jdbcType=INTEGER},#{cardAtkGrowValue,jdbcType=DECIMAL}
+        ,#{cardDef,jdbcType=INTEGER},#{cardDefGrowValue,jdbcType=DECIMAL},#{cardStrategyValue,jdbcType=INTEGER}
+        ,#{cardStrategyGrowValue,jdbcType=DECIMAL},#{cardSpeedValue,jdbcType=INTEGER},#{cardSpeedGrowValue,jdbcType=DECIMAL}
+        ,#{cardAttackRange,jdbcType=INTEGER},#{cardCost,jdbcType=INTEGER},#{cardBots,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.yutong.stzb.domain.Card" useGeneratedKeys="true">
+        insert into card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="cardName != null">card_name,</if>
+                <if test="cardSkill != null">card_skill,</if>
+                <if test="cardSkillType != null">card_skill_type,</if>
+                <if test="cardSkillEffectiveDistance != null">card_skill_effective_distance,</if>
+                <if test="cardSkillTargetType != null">card_skill_target_type,</if>
+                <if test="cardSkillStartingRate != null">card_skill_starting_rate,</if>
+                <if test="cardAtk != null">card_atk,</if>
+                <if test="cardAtkGrowValue != null">card_atk_grow_value,</if>
+                <if test="cardDef != null">card_def,</if>
+                <if test="cardDefGrowValue != null">card_def_grow_value,</if>
+                <if test="cardStrategyValue != null">card_strategy_value,</if>
+                <if test="cardStrategyGrowValue != null">card_strategy_grow_value,</if>
+                <if test="cardSpeedValue != null">card_speed_value,</if>
+                <if test="cardSpeedGrowValue != null">card_speed_grow_value,</if>
+                <if test="cardAttackRange != null">card_attack_range,</if>
+                <if test="cardCost != null">card_cost,</if>
+                <if test="cardBots != null">card_bots,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="cardName != null">#{cardName,jdbcType=VARCHAR},</if>
+                <if test="cardSkill != null">#{cardSkill,jdbcType=VARCHAR},</if>
+                <if test="cardSkillType != null">#{cardSkillType,jdbcType=INTEGER},</if>
+                <if test="cardSkillEffectiveDistance != null">#{cardSkillEffectiveDistance,jdbcType=INTEGER},</if>
+                <if test="cardSkillTargetType != null">#{cardSkillTargetType,jdbcType=INTEGER},</if>
+                <if test="cardSkillStartingRate != null">#{cardSkillStartingRate,jdbcType=DECIMAL},</if>
+                <if test="cardAtk != null">#{cardAtk,jdbcType=INTEGER},</if>
+                <if test="cardAtkGrowValue != null">#{cardAtkGrowValue,jdbcType=DECIMAL},</if>
+                <if test="cardDef != null">#{cardDef,jdbcType=INTEGER},</if>
+                <if test="cardDefGrowValue != null">#{cardDefGrowValue,jdbcType=DECIMAL},</if>
+                <if test="cardStrategyValue != null">#{cardStrategyValue,jdbcType=INTEGER},</if>
+                <if test="cardStrategyGrowValue != null">#{cardStrategyGrowValue,jdbcType=DECIMAL},</if>
+                <if test="cardSpeedValue != null">#{cardSpeedValue,jdbcType=INTEGER},</if>
+                <if test="cardSpeedGrowValue != null">#{cardSpeedGrowValue,jdbcType=DECIMAL},</if>
+                <if test="cardAttackRange != null">#{cardAttackRange,jdbcType=INTEGER},</if>
+                <if test="cardCost != null">#{cardCost,jdbcType=INTEGER},</if>
+                <if test="cardBots != null">#{cardBots,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yutong.stzb.domain.Card">
+        update card
+        <set>
+                <if test="cardName != null">
+                    card_name = #{cardName,jdbcType=VARCHAR},
+                </if>
+                <if test="cardSkill != null">
+                    card_skill = #{cardSkill,jdbcType=VARCHAR},
+                </if>
+                <if test="cardSkillType != null">
+                    card_skill_type = #{cardSkillType,jdbcType=INTEGER},
+                </if>
+                <if test="cardSkillEffectiveDistance != null">
+                    card_skill_effective_distance = #{cardSkillEffectiveDistance,jdbcType=INTEGER},
+                </if>
+                <if test="cardSkillTargetType != null">
+                    card_skill_target_type = #{cardSkillTargetType,jdbcType=INTEGER},
+                </if>
+                <if test="cardSkillStartingRate != null">
+                    card_skill_starting_rate = #{cardSkillStartingRate,jdbcType=DECIMAL},
+                </if>
+                <if test="cardAtk != null">
+                    card_atk = #{cardAtk,jdbcType=INTEGER},
+                </if>
+                <if test="cardAtkGrowValue != null">
+                    card_atk_grow_value = #{cardAtkGrowValue,jdbcType=DECIMAL},
+                </if>
+                <if test="cardDef != null">
+                    card_def = #{cardDef,jdbcType=INTEGER},
+                </if>
+                <if test="cardDefGrowValue != null">
+                    card_def_grow_value = #{cardDefGrowValue,jdbcType=DECIMAL},
+                </if>
+                <if test="cardStrategyValue != null">
+                    card_strategy_value = #{cardStrategyValue,jdbcType=INTEGER},
+                </if>
+                <if test="cardStrategyGrowValue != null">
+                    card_strategy_grow_value = #{cardStrategyGrowValue,jdbcType=DECIMAL},
+                </if>
+                <if test="cardSpeedValue != null">
+                    card_speed_value = #{cardSpeedValue,jdbcType=INTEGER},
+                </if>
+                <if test="cardSpeedGrowValue != null">
+                    card_speed_grow_value = #{cardSpeedGrowValue,jdbcType=DECIMAL},
+                </if>
+                <if test="cardAttackRange != null">
+                    card_attack_range = #{cardAttackRange,jdbcType=INTEGER},
+                </if>
+                <if test="cardCost != null">
+                    card_cost = #{cardCost,jdbcType=INTEGER},
+                </if>
+                <if test="cardBots != null">
+                    card_bots = #{cardBots,jdbcType=INTEGER},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yutong.stzb.domain.Card">
+        update card
+        set 
+            card_name =  #{cardName,jdbcType=VARCHAR},
+            card_skill =  #{cardSkill,jdbcType=VARCHAR},
+            card_skill_type =  #{cardSkillType,jdbcType=INTEGER},
+            card_skill_effective_distance =  #{cardSkillEffectiveDistance,jdbcType=INTEGER},
+            card_skill_target_type =  #{cardSkillTargetType,jdbcType=INTEGER},
+            card_skill_starting_rate =  #{cardSkillStartingRate,jdbcType=DECIMAL},
+            card_atk =  #{cardAtk,jdbcType=INTEGER},
+            card_atk_grow_value =  #{cardAtkGrowValue,jdbcType=DECIMAL},
+            card_def =  #{cardDef,jdbcType=INTEGER},
+            card_def_grow_value =  #{cardDefGrowValue,jdbcType=DECIMAL},
+            card_strategy_value =  #{cardStrategyValue,jdbcType=INTEGER},
+            card_strategy_grow_value =  #{cardStrategyGrowValue,jdbcType=DECIMAL},
+            card_speed_value =  #{cardSpeedValue,jdbcType=INTEGER},
+            card_speed_grow_value =  #{cardSpeedGrowValue,jdbcType=DECIMAL},
+            card_attack_range =  #{cardAttackRange,jdbcType=INTEGER},
+            card_cost =  #{cardCost,jdbcType=INTEGER},
+            card_bots =  #{cardBots,jdbcType=INTEGER}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+</mapper>
